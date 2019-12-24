@@ -15,18 +15,23 @@ Prepare analysis to create slides to be submitted for the ASHRAE Winter Meeting 
    * Historical competitions
    
 #### Section 1 - Overview/Background
-   * General idea: Give background, motivation, and overall understanding of the competition and its process
+   ##### General idea: Give background, motivation, and overall understanding of the competition and its process
+   * General (Leader: Clayton)
 
 #### Section 2 - Participants
-   * General idea: Characterize and label participants and discussion topics from the competition
-   * General deliverable: Overview visualization(s) that gives an understanding of the people involved in the competition 
+   ##### General idea: Characterize and label participants and discussion topics from the competition
+   ##### General deliverable: Overview visualization(s) that gives an understanding of the people involved in the competition 
+   * People/Demographics (Leader: Jon)
+   * Discussion Board/Text Analysis (Anju)
 
 #### Section 3 - Models and Analysis
-   * General idea: Characterize and label notebooks and techniques/discussion topics from the competition
-   * General deliverable: A directory of notebooks that helps a beginner understand how to do various techniques. A general understanding of what steps, features, and models worked well or not.
+   ##### General idea: Characterize and label notebooks and techniques/discussion topics from the competition
+   ##### General deliverable: A directory of notebooks that helps a beginner understand how to do various techniques. A general understanding of what steps, features, and models worked well or not.
+   * EDA/Features (Leader: Chun)
+   * Models/Scores (Leader: Samy)
 
 #### Section 4 - Winners
-   * People/Demographics/Models
+   ##### People/Demographics/Models
 
 ## Timeline
 - Dec 20, 2019 - End of Kaggle competition: ASHRAE Great Energy Predictor Shootout III
