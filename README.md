@@ -24,7 +24,7 @@ Prepare analysis to create slides to be submitted for the ASHRAE Winter Meeting 
    * People/Demographics (Leader: Jon)
    * Discussion Board/Text Analysis (Anju)
 
-#### Section 3 - Models and Analysis
+#### [Section 3 - Models and Analysis](Section3)
    ##### General idea: Characterize and label notebooks and techniques/discussion topics from the competition
    ##### General deliverable: A directory of notebooks that helps a beginner understand how to do various techniques. A general understanding of what steps, features, and models worked well or not.
    * EDA/Features (Leader: Chun)
