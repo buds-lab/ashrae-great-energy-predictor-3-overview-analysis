@@ -10,7 +10,7 @@ Prepare analysis to create slides to be submitted for the ASHRAE Winter Meeting 
    * Get meata data of Kernel notebooks, Discussion topics, and Historical competitions
 
 #### Tagging for meta data (spreadsheet)
-   * [Kernel notebooks](https://docs.google.com/spreadsheets/d/1VXaw0lW50bXXAe_cgQ25XW2CJuz3fbwNqS6nCAv42hk/edit?usp=sharing) 
+   * [Kernel notebooks](Section3/ASHRAE-Kaggle_notebooks_meta(Tagged).xlsx) 
    * Discussion topics
    * Historical competitions
    
