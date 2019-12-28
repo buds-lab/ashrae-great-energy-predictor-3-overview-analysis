@@ -22,7 +22,7 @@ Prepare analysis to create slides to be submitted for the ASHRAE Winter Meeting 
      General idea: Characterize and label participants and discussion topics from the competition
      General deliverable: Overview visualization(s) that gives an understanding of the people involved in the competition 
    * People/Demographics (Leader: Jon)
-   * Discussion Board/Text Analysis (Anju)
+   * [Discussion Board/Text Analysis](Section2/DiscussionAnalysis.ipynb) (Anju)
 
 #### [Section 3 - Models and Analysis](Section3)
      General idea: Characterize and label notebooks and techniques/discussion topics from the competition
