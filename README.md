@@ -20,6 +20,18 @@ https://docs.google.com/document/d/10xlPF9_o6602QidKmEeZPSAGx7mT_3sXQ4Q_0TDNnTE/
 * If you have references that you would like to add to the manuscript, you can leave a comment with the name of the reference and link and the text highlighted where the reference should be placed. I will find the reference and insert it into the manuscript with Paperpile. 
 
 ## Work list:
+
+#### Assignment topic overview - you will find more detailed comments in the [Google document](https://docs.google.com/document/d/10xlPF9_o6602QidKmEeZPSAGx7mT_3sXQ4Q_0TDNnTE/edit?usp=sharing):
+   * Anjukan Kathirgamanathan - Discussion Sub-section
+   * Chris Balbach - Assistance with Introduction, Previous Competitions, Pre-competition Development sections
+   * Chun Fu - Help with graphics in the Data Set, Rules and Procedures and Shared ML Workflows Section
+   * Jonathan Roth - Lead the development of the Competitors section and coordinate with Anju
+   * Jeff Haberl - Review and leave comments on the whole paper
+   * June Young Park - Work on a small literature review of ML Prediction review paper, ML competition, and other relevant articles
+   * Krishnan Gowri - Assistance with Introduction, Previous Competitions
+   * Pandarasamy Arjunan - Lead the Overview of the Top Five Winning Teams Section
+   * Zoltan Nagy - Assist in the Introduction and Conclusions Section
+
 #### [Web Scraping](WebScraping) from Kaggle website
    * Get meata data of Kernel notebooks, Discussion topics, and Historical competitions
 
