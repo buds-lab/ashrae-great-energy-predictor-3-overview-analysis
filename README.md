@@ -2,15 +2,15 @@
 
 This repository is for overview analysis of ASHRAE Great Energy Predictor Shootout III in 2019.
 
-Analysis Phases:
+#### Analysis Phases:
 
-Phase 1 - In this phase, we will prepare to create slides to be submitted for the ASHRAE Winter Meeting in Orlando - this will include overall statistics and some understanding of the models used in the process.
+* Phase 1 - In this phase, we will prepare to create slides to be submitted for the ASHRAE Winter Meeting in Orlando - this will include overall statistics and some understanding of the models used in the process.
 
-Phase 2 - Here will will aggregate results, create visualisations, and write up drafts for several journal publications.
+* Phase 2 - Here will will aggregate results, create visualisations, and write up drafts for several journal publications.
 
 ## Objectives in this phase (Phase 2):
 
-Finish and submit Jounal Paper: "The ASHRAE Great Energy Predictor III Kaggle Competition: Overview and Discussion of Results"
+Finish and submit Jounal Paper: *"The ASHRAE Great Energy Predictor III Kaggle Competition: Overview and Discussion of Results"*
   
 Check and complete corresponding assignments on working document before deadline:
 https://docs.google.com/document/d/10xlPF9_o6602QidKmEeZPSAGx7mT_3sXQ4Q_0TDNnTE/edit?usp=sharing
