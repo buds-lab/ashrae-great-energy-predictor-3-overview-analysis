@@ -9,7 +9,9 @@ Phase 1 - In this phase, we will prepare to create slides to be submitted for th
 Phase 2 - Here will will aggregate results, create visualisations, and write up drafts for several journal publications.
 
 ## Objectives in this phase (Phase 2):
-Finish and submit Jounal Paper: <The ASHRAE Great Energy Predictor III Kaggle Competition: Overview and Discussion of Results>
+
+Finish and submit Jounal Paper: "The ASHRAE Great Energy Predictor III Kaggle Competition: Overview and Discussion of Results"
+  
 Check and complete corresponding assignments on working document before deadline:
 https://docs.google.com/document/d/10xlPF9_o6602QidKmEeZPSAGx7mT_3sXQ4Q_0TDNnTE/edit?usp=sharing
 #### Some requests:
