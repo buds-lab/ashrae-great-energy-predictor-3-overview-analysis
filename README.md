@@ -1,11 +1,37 @@
 # ashrae-great-energy-predictor-3-overview-analysis
 
-This repository is for overview analysis of ASHRAE Great Energy Predictor Shootout III in 2019, which corresponds Phase 1 of whole review (Phase 2 is for journal publications).
+This repository is for overview analysis of ASHRAE Great Energy Predictor Shootout III in 2019.
 
-## Objectives this phase:
-Prepare analysis to create slides to be submitted for the ASHRAE Winter Meeting in Orlando (due on Jan 6) - this will include overall statistics and some understanding of the models used in the process.
+#### Analysis Phases:
+
+* Phase 1 - In this phase, we will prepare to create slides to be submitted for the ASHRAE Winter Meeting in Orlando - this will include overall statistics and some understanding of the models used in the process.
+
+* Phase 2 - Here will will aggregate results, create visualisations, and write up drafts for several journal publications.
+
+## Objectives in this phase (Phase 2):
+
+Finish and submit Jounal Paper: *"The ASHRAE Great Energy Predictor III Kaggle Competition: Overview and Discussion of Results"*
+  
+Check and complete corresponding assignments on working document before deadline:
+https://docs.google.com/document/d/10xlPF9_o6602QidKmEeZPSAGx7mT_3sXQ4Q_0TDNnTE/edit?usp=sharing
+#### Some requests:
+* Please use the google doc as a working document by continuously updating it with comment and content. Don't write something up elsewhere to be added
+* Most of the images are Google Drawings that I’ve dropped example graphics into — you can edit these by double clicking on them to add the new content (instead of using power point to make the combined graphics)
+* If you have references that you would like to add to the manuscript, you can leave a comment with the name of the reference and link and the text highlighted where the reference should be placed. I will find the reference and insert it into the manuscript with Paperpile. 
 
 ## Work list:
+
+#### Assignment topic overview - you will find more detailed comments in the [Google document](https://docs.google.com/document/d/10xlPF9_o6602QidKmEeZPSAGx7mT_3sXQ4Q_0TDNnTE/edit?usp=sharing):
+   * Anjukan Kathirgamanathan - Discussion Sub-section
+   * Chris Balbach - Assistance with Introduction, Previous Competitions, Pre-competition Development sections
+   * Chun Fu - Help with graphics in the Data Set, Rules and Procedures and Shared ML Workflows Section
+   * Jonathan Roth - Lead the development of the Competitors section and coordinate with Anju
+   * Jeff Haberl - Review and leave comments on the whole paper
+   * June Young Park - Work on a small literature review of ML Prediction review paper, ML competition, and other relevant articles
+   * Krishnan Gowri - Assistance with Introduction, Previous Competitions
+   * Pandarasamy Arjunan - Lead the Overview of the Top Five Winning Teams Section
+   * Zoltan Nagy - Assist in the Introduction and Conclusions Section
+
 #### [Web Scraping](WebScraping) from Kaggle website
    * Get meata data of Kernel notebooks, Discussion topics, and Historical competitions
 
@@ -13,6 +39,7 @@ Prepare analysis to create slides to be submitted for the ASHRAE Winter Meeting 
    * [Kernel notebooks](Section3/ASHRAE-Kaggle_notebooks_meta(Tagged).xlsx) 
    * Discussion topics
    * Historical competitions
+   * [Notebook Workflow](https://docs.google.com/spreadsheets/d/1HZz-tM1TomXYz2Ux0dNXfU7sF4_yrnAEAXtLoLYUnMs/edit?usp=sharing)
    
 #### Section 1 - Overview/Background
      General idea: Give background, motivation, and overall understanding of the competition and its process
@@ -31,8 +58,12 @@ Prepare analysis to create slides to be submitted for the ASHRAE Winter Meeting 
    * Models/Scores (Leader: Samy)
 
 #### Section 4 - Winners
-     People/Demographics/Models
+   * Demographics of the Winners (Leader: Jon/Anjukan)
+   * EDA/ML Process of Winner (Leader: Chun)
+   * Models of the Winners (Leader: Samy)
 
 ## Timeline
-- Dec 20, 2019 - End of Kaggle competition: ASHRAE Great Energy Predictor Shootout III
-- Jan 6, 2020 - Due day for submission to ASHRAE Winter Meeting in Orlando
+- ~Dec 20, 2019 - End of Kaggle competition: ASHRAE Great Energy Predictor Shootout III~
+- ~Jan 6, 2020 - Due day for submission to ASHRAE Winter Meeting in Orlando~
+- Jan 27, 2020 - 95% draft due for everyone to comment and review (including Kaggle)
+- Feb 2, 2020 - Preprint draft ready to post on ResearchGate and submit to Journal in time for the presentation

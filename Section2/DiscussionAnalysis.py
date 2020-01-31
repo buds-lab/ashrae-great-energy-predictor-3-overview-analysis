@@ -3,13 +3,14 @@
 
 # ## Load Packages
 
-# In[34]:
+# In[107]:
 
 
 import os
 
 import pandas as pd
 import numpy as np
+import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib.colors import ColorConverter, ListedColormap
 import calendar
@@ -48,10 +49,13 @@ nltk.download('stopwords')
 from nltk.corpus import stopwords
 from pattern.en import sentiment
 
+import squarify
+from bokeh.palettes import viridis, inferno, plasma
+
 
 # ## Function Definitions
 
-# In[2]:
+# In[17]:
 
 
 # Define function to clean text
@@ -72,7 +76,7 @@ def preprocess(ReviewText):
     return ReviewText
 
 
-# In[3]:
+# In[18]:
 
 
 # Function to create a calendar plot of activity (posting discussions and commenting)
@@ -198,7 +202,7 @@ def calendar_plot(data, year=None, how='count', column = 'content', savefig=Fals
     plt.show()
 
 
-# In[4]:
+# In[19]:
 
 
 # Taken from SOAN package (https://github.com/MaartenGr/soan/blob/master/whatsapp/sentiment.py with modifications
@@ -266,7 +270,7 @@ def plot_sentiment(df, savefig=False):
         fig.savefig('ASHRAE - Sentiment over time.jpg', dpi=300)
 
 
-# In[5]:
+# In[20]:
 
 
 def extract_emojis(str):
@@ -360,7 +364,7 @@ def count_emojis(df, non_unicode = False):
     return emoji_all
 
 
-# In[6]:
+# In[21]:
 
 
 # Taken from SOAN package (https://github.com/MaartenGr/soan/blob/master/whatsapp/wordcloud.py with modifications
@@ -415,7 +419,7 @@ def create_wordcloud(data, cmap=None, savefig=False, **kwargs):
     return wc.to_image()
 
 
-# In[7]:
+# In[22]:
 
 
 # Taken from SOAN package (https://github.com/MaartenGr/soan/blob/master/whatsapp/wordcloud.py with modifications
@@ -455,7 +459,7 @@ def extract_sentiment_count(counts):
     return positive, negative
 
 
-# In[8]:
+# In[23]:
 
 
 def count_words(df, sentence_column = "content"):
@@ -496,28 +500,31 @@ def count_words(df, sentence_column = "content"):
 
 # ## Load Data
 
-# In[9]:
+# In[114]:
 
 
 post_df = pd.read_csv('discussions.csv')
 comments_df = pd.read_csv('comments.csv')
 
 
-# In[10]:
+# In[115]:
 
 
 # Add title information to post content
 post_df['content'] = post_df['content'].str.cat(post_df['title'], sep =". ", join = 'inner', na_rep = '')
 
 
-# In[11]:
+# In[116]:
 
+
+# Modify timeformat of post data
+post_df['postDate'] = pd.to_datetime(post_df['postDate'], format='%d/%m/%Y %H:%M')
 
 # Create combined dataframe
 combined_df = pd.concat([comments_df,post_df], ignore_index=True, join='inner')
 
 
-# In[12]:
+# In[117]:
 
 
 post_df['content'] = preprocess(post_df['content'])
@@ -534,7 +541,7 @@ post_df['word_count'] = post_df['content'].apply(lambda x: len(str(x).split()))
 
 # ## Exploratory Data Analysis
 
-# In[13]:
+# In[118]:
 
 
 # Summary Information
@@ -549,14 +556,14 @@ print("The total number of comments related to the ASHRAE Competition:",len(comm
 print("The number of competitors who participated in the ASHRAE Competition discussion forums:",len(np.unique(combined_df['author'])))
 
 
-# In[14]:
+# In[97]:
 
 
 # Rank discussions by upvotes
 print(post_df.sort_values(by = ['votes'], ascending=False)[['title','votes']])
 
 
-# In[59]:
+# In[40]:
 
 
 # Plot the distribution discussion post length
@@ -565,7 +572,7 @@ fig = px.histogram(post_df['post_len'],
              y='post_len', 
              title='Discussion Post Length (# of Characters) Distribution', 
              nbins=25,
-            color_discrete_sequence=['indianred'])
+            color_discrete_sequence=['darkblue'])
 
 fig.update_traces(marker_line_color='rgb(0,0,0)',marker_line_width=1.5)
 
@@ -576,16 +583,25 @@ fig.write_image("ASHRAE - Discussion Post Length.jpg", width=1200, height=600)
 
 # ## Sentiment Analysis
 
-# In[16]:
+# In[154]:
 
 
 print('5 posts with the highest sentiment polarity: \n')
-cl = post_df.loc[post_df.polarity > 0.5, ['content']].sample(5).values
+cl = post_df.loc[post_df.polarity > 0.4, ['content']].sample(5).values
 for c in cl:
     print(c[0])
 
 
-# In[17]:
+# In[173]:
+
+
+print('5 posts/comments with the highest sentiment polarity: \n')
+cl = post_df.loc[post_df.polarity > 0.5 , ['content']].sample(5).values
+for c in cl:
+    print(c[0])
+
+
+# In[32]:
 
 
 print('2 posts with the most negative polarity: \n')
@@ -594,7 +610,7 @@ for c in cl:
     print(c[0])
 
 
-# In[60]:
+# In[126]:
 
 
 # Plot the distribution of polarity of sentiments in discussion posts
@@ -603,23 +619,24 @@ fig = px.histogram(post_df['polarity'],
              y='polarity', 
              title='Sentiment Polarity Distribution - Discussion Posts', 
              nbins=50,
-            color_discrete_sequence=['indianred'])
+            color_discrete_sequence=['darkblue'])
 
 fig.update_traces(marker_line_color='rgb(0,0,0)',marker_line_width=1.5)
+fig.update_layout(font_size=20)
 
 fig.show()
 
-fig.write_image("ASHRAE - Sentiment Polarity.jpg", width=1200, height=600)
+fig.write_image("ASHRAE - Sentiment Polarity.jpg", width=1000, height=1000)
 
 
-# In[61]:
+# In[45]:
 
 
 # Remove comments with no content (e.g. picture/meme comments)
 combined_df = combined_df[~combined_df['content'].isnull()]
 
 
-# In[62]:
+# In[46]:
 
 
 # Inspect top unigrams (after removing stop words)
@@ -641,7 +658,7 @@ df1.groupby('content').sum()['count'].sort_values(ascending=False).iplot(
     kind='bar', yTitle='Count', linecolor='black', title='Top 20 words in discussions after removing stop words')
 
 
-# In[65]:
+# In[47]:
 
 
 # As word cloud
@@ -668,7 +685,7 @@ create_wordcloud(data=negative, cmap='Reds',
                            relative_scaling=0.5)
 
 
-# In[76]:
+# In[48]:
 
 
 # Inspect top bigrams (after removing stop words)
@@ -697,7 +714,7 @@ fig.show()
 fig.write_image("ASHRAE - Top Bigrams.jpg", width=1200, height=600)
 
 
-# In[77]:
+# In[49]:
 
 
 # Inspect top trigrams (after removing stop words)
@@ -720,7 +737,7 @@ df3.groupby('content').sum()['count'].sort_values(ascending=False).iplot(
 
 # ## Temporal Analysis
 
-# In[78]:
+# In[75]:
 
 
 # Create a plot showing activity levels over the competition timeframe (in terms of posting discussions and commenting)
@@ -728,14 +745,14 @@ combined_df['postDate'] = pd.to_datetime(combined_df['postDate'], format='%Y-%m-
 calendar_plot(combined_df, year=None, how='count', column = 'content', savefig=True, dpi=300)
 
 
-# In[79]:
+# In[76]:
 
 
 # Sentiment analysis over time
 plot_sentiment(combined_df, savefig = True)
 
 
-# In[85]:
+# In[77]:
 
 
 # Emoji analysis
@@ -751,4 +768,55 @@ fig.update_traces(marker_line_color='rgb(0,0,0)',marker_line_width=1.5)
 fig.show()
 
 fig.write_image("ASHRAE - Emoji Histogram.jpg", width=1200, height=600)
+
+
+# ### Create Treemap of Discussion Topics
+
+# In[143]:
+
+
+# Create dataframe with counts of the discussion post 'tags'
+topic_counts = post_df['tag'].value_counts()
+topic_counts = topic_counts.to_frame()
+
+# Assign column names
+topic_counts.columns = ['Count']
+
+print(topic_counts)
+
+
+# In[144]:
+
+
+# Add \n to long label names
+#as_list = topic_counts.index.tolist()
+#idx = as_list.index('Error Metric + Postprocessing')
+#as_list[idx] = 'Error Metric + \nPostprocessing'
+#topic_counts.index = as_list
+
+topic_counts.rename(index={'Error Metric + Postprocessing':'Error Metric +\nPostprocessing','Rules and Enforcement':
+                          'Rules &\nEnforcement','Kaggle + Technical Committee':'Kaggle +\nTechnical Committee',
+                          'Competition Feedback':'Competition\nFeedback'},inplace=True)
+
+
+# In[145]:
+
+
+#Create our plot and resize it.
+fig = plt.gcf()
+ax = fig.add_subplot()
+fig.set_size_inches(14, 14)
+
+norm = matplotlib.colors.Normalize(vmin=min(topic_counts['Count']), vmax=max(topic_counts['Count']))
+colors = [matplotlib.cm.YlGnBu(norm(value)) for value in topic_counts['Count']]
+
+squarify.plot(sizes=topic_counts['Count'],
+                  label=topic_counts.index + '\nCount=' + topic_counts['Count'].astype(str),
+                  alpha=.7,
+                  color = colors,
+                  text_kwargs={'fontsize':12, 'weight':'bold'})
+plt.axis('off')
+plt.title('Discussion Post Tag Count')
+plt.savefig('ASHRAE - Discussion Tag Treemap.jpg', dpi = 300)
+plt.show()
 
