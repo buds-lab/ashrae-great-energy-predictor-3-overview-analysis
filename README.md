@@ -20,7 +20,7 @@ This repository is for overview analysis of ASHRAE Great Energy Predictor Shooto
 #### Section 2 - Participants
      General idea: Characterize and label participants and discussion topics from the competition
      General deliverable: Overview visualization(s) that gives an understanding of the people involved in the competition 
-   * People/Demographics (Leader: Jon)
+   * [People/Demographics](Demographics) (Leader: Jon)
    * [Discussion Board/Text Analysis](Section2/DiscussionAnalysis.ipynb) (Anju)
 
 #### [Section 3 - Models and Analysis](Section3)
@@ -31,7 +31,7 @@ This repository is for overview analysis of ASHRAE Great Energy Predictor Shooto
    * EDA/Features (Leader: Chun)
 
 #### Section 4 - Winners
-   * [Demographics of the Winners](Section3/Demographics) (Leader: Jon/Anjukan)
+   * [Demographics of the Winners](Demographics) (Leader: Jon/Anjukan)
    * EDA/ML Process of Winner (Leader: Chun)
    * Models of the Winners (Leader: Samy)
 
