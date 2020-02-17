@@ -11,13 +11,7 @@ This repository is for overview analysis of ASHRAE Great Energy Predictor Shooto
 ## Work list:
 
 #### [Web Scraping](WebScraping) from Kaggle website
-   * Get meata data of Kernel notebooks, Discussion topics, and Historical competitions
-
-#### Tagging for meta data (spreadsheet)
-   * [Kernel notebooks](Section3/ASHRAE-Kaggle_notebooks_meta(Tagged).xlsx) 
-   * Discussion topics
-   * Historical competitions
-   * [Notebook Workflow](https://docs.google.com/spreadsheets/d/1HZz-tM1TomXYz2Ux0dNXfU7sF4_yrnAEAXtLoLYUnMs/edit?usp=sharing)
+   * Get meata data of Kernel notebooks, Discussion topics, and Historical competitions   
    
 #### Section 1 - Overview/Background
      General idea: Give background, motivation, and overall understanding of the competition and its process
@@ -32,6 +26,8 @@ This repository is for overview analysis of ASHRAE Great Energy Predictor Shooto
 #### [Section 3 - Models and Analysis](Section3)
      General idea: Characterize and label notebooks and techniques/discussion topics from the competition
      General deliverable: A directory of notebooks that helps a beginner understand how to do various techniques. A general understanding of what steps, features, and models worked well or not.
+   * [Kernel notebooks tagging](Section3/ASHRAE-Kaggle_notebooks_meta(Tagged).xlsx) 
+   * [Notebook Workflow](https://docs.google.com/spreadsheets/d/1HZz-tM1TomXYz2Ux0dNXfU7sF4_yrnAEAXtLoLYUnMs/edit?usp=sharing)
    * EDA/Features (Leader: Chun)
 
 #### Section 4 - Winners
