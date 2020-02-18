@@ -32,8 +32,7 @@ This repository is for overview analysis of ASHRAE Great Energy Predictor Shooto
 
 #### Section 4 - Winners
    * [Demographics of the Winners](Demographics) (Leader: Jon/Anjukan)
-   * EDA/ML Process of Winner (Leader: Chun)
-   * Models of the Winners (Leader: Samy)
+   * EDA/ML Process of the Winners (Leader: Samy)
 
 ## Timeline
 - ~Dec 20, 2019 - End of Kaggle competition: ASHRAE Great Energy Predictor Shootout III~
