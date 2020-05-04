@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 import numpy as np
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 import requests
 from bs4 import BeautifulSoup
@@ -12,7 +13,7 @@ from collections import Counter
 import seaborn as sns
 import pickle
 import squarify
-from bokeh.palettes import viridis, inferno, plasma
+from bokeh.palettes import viridis, inferno, plasma, YlGnBu
 from scipy import stats
 from itertools import groupby
 
@@ -185,21 +186,22 @@ def create_country_plots(participant_dict2, CUTOFF_NUMBER=1):
     country_df = country_df.sort_values(['Percentage'], ascending=False).reset_index(drop=True)
 
     # TREEMAP PLOT
+    mpl.rcParams['text.color'] = 'white'
+    c = sns.color_palette("YlGnBu", 40)[26:]
     squarify.plot(sizes=country_df['Count'],
                   label=country_df['Country'] + '\nCount=' + country_df['Count'].astype(str),
-                  alpha=.7,
-                  color=inferno(14))
+                  alpha=.95,
+                  color=c[::-1])
     plt.axis('off')
     plt.title('Participants Countries of Origin')
-    plt.savefig('/Users/jonathanroth/PycharmProjects/Kaggle_Demographics/participant_figures/countries_treemap.png')
+    plt.savefig(os.getcwd() + '/participant_figures/countries_treemap.png')
     plt.show()
 
     # BARPLOT
-    ax = sns.barplot(x="Country", y='Percentage', data=country_df, color=(0.2, 0.4, 0.6, 0.6))
-    plt.xticks(rotation=35)
-    plt.savefig(
-        '/Users/jonathanroth/PycharmProjects/Probabilistic Forecasting/Kaggle/participant_figures/countries_hist.pdf')
-    plt.show()
+    # ax = sns.barplot(x="Country", y='Percentage', data=country_df, color=(0.2, 0.4, 0.6, 0.6))
+    # plt.xticks(rotation=35)
+    # plt.savefig(os.getcwd() + '/participant_figures/countries_hist.pdf')
+    # plt.show()
     return country_df
 
 
@@ -213,17 +215,44 @@ def ranking_plots(participant_dict2):
     rank_df['Rank'] = rank_df['Rank'].astype(str)
     rank_df = rank_df.sort_values(['Percentage'], ascending=False).reset_index(drop=True)
     rank_df['circle_size'] = rank_df['Count'] ** 0.5 / np.pi
-    ax = sns.barplot(x="Rank", y='Count', data=rank_df, color=(0.2, 0.4, 0.6, 0.6))
-    plt.xticks(rotation=30)
-    plt.savefig(os.getcwd() + '/participant_figures/rank_hist.pdf', bbox_inches='tight', pad_inches=2)
-    plt.show()
+    # ax = sns.barplot(x="Rank", y='Count', data=rank_df, color=(0.2, 0.4, 0.6, 0.6))
+    # plt.xticks(rotation=30)
+    # plt.savefig(os.getcwd() + '/participant_figures/rank_hist.pdf', bbox_inches='tight', pad_inches=2)
+    # plt.show()
 
-    plt.rcParams['axes.xmargin'] = 0.1
-    ax = sns.scatterplot(x="Rank", y=np.repeat(1, 5), s=rank_df['Count'] * 2, data=rank_df,
-                         color=(0.2, 0.4, 0.6, 0.6))
+    plt.rcParams['axes.xmargin'] = 0.2
+    ax = sns.scatterplot(x="Rank", y=np.repeat(1, 5), hue="Rank", s=rank_df['Count'] * 2.3, data=rank_df,
+                         palette=sns.color_palette(desat=.75)[0:5])
+    fig = plt.gcf()
+    fig.set_size_inches(6.667, 5)
     plt.savefig(os.getcwd() + '/participant_figures/ranks_numbers.png', bbox_inches='tight')
     plt.show()
     return rank_df
+
+
+def create_final_df(teams_scores):
+    teams_scores_df = pd.DataFrame(teams_scores).T
+    teams_scores_df.columns = ['Team #', 'Score', 'Entries']
+    teams_scores_df['Team Name'] = teams_scores_df.index
+    team_members_df = pd.DataFrame.from_dict(teams_members_dict, orient='index')
+    team_members_df = pd.DataFrame([(k, member) for k, v in teams_members_dict.items() for member in v])
+    team_members_df.columns = ['Team Name', 'Member']
+    members_scores = pd.merge(team_members_df, teams_scores_df, on=['Team Name'])
+    participants_df = pd.DataFrame(participant_dict2).drop(147)
+    col_names = list(participants_df.columns)
+    col_names[0] = 'Member'
+    participants_df.columns = col_names
+    final_df = pd.merge(participants_df, members_scores, on=['Member'])
+    return final_df
+
+
+def create_medals_df(final_df):
+    medals_df = final_df.iloc[0:578, ]
+    medals = np.concatenate([np.repeat('Winners', 11),
+                             np.repeat('Gold', 24),
+                             np.repeat('Silver', 285),
+                             np.repeat('Bronze', 258)])
+    return medals
 
 
 def rankVcompetitions(participant_dict2):
@@ -237,9 +266,17 @@ def rankVcompetitions(participant_dict2):
     rank_competitions_df = pd.DataFrame({'Rank': performancetier_vec,
                                          '# Competitions': pd.to_numeric(totalcompetitions_vec)})
 
-    ax = sns.boxplot(x="Rank", y="# Competitions", data=rank_competitions_df,
-                     order=["novice", "contributor", "expert", "master", "grandmaster"])
-    plt.savefig(os.getcwd() + '/participant_figures/rankvcompetitions.png')
+    ax = sns.boxplot(y="Rank", x="# Competitions", data=rank_competitions_df, orient='h',
+                     order=["novice", "contributor", "expert", "master", "grandmaster"], fliersize=1.5)
+    ax.spines['right'].set_visible(False)
+    ax.spines['top'].set_visible(False)
+    ax.spines['left'].set_visible(False)
+    plt.ylabel('')
+    plt.yticks([])
+    plt.xlim([0,200])
+    fig = plt.gcf()
+    fig.set_size_inches(5, 6.67)
+    plt.savefig(os.getcwd() + '/participant_figures/rankvcompetitions.png', bbox_inches='tight')
     plt.show()
     return rank_competitions_df
 
@@ -291,10 +328,15 @@ def scoresVentries(teams_scores_df):
 
 
 def score_boxplot(final_df):
-    ax = sns.boxplot(x="performancetier", y="Score", data=final_df[final_df['Score'] <=2],
-                     order=["novice", "contributor", "expert", "master", "grandmaster"])
-    # plt.ylim([1.2, 2])
-    plt.savefig(os.getcwd() + '/participant_figures/rankvscores.png')
+    ax = sns.boxplot(y="performancetier", x="Score", data=final_df[final_df['Score'] <=2], orient='h',
+                     order=["novice", "contributor", "expert", "master", "grandmaster"],fliersize=1.5)
+    ax.spines['right'].set_visible(False)
+    ax.spines['top'].set_visible(False)
+    plt.xlim([1.2, 2])
+    plt.ylabel('Kaggle Ranking')
+    fig = plt.gcf()
+    fig.set_size_inches(5, 6.67)
+    plt.savefig(os.getcwd() + '/participant_figures/rankvscores.png', bbox_inches='tight')
     plt.show()
 
 
@@ -306,6 +348,64 @@ def medals_plots(medal_groups):
     # plt.savefig(os.getcwd() + '/participant_figures/medals_rank.png', bbox_inches='tight')
     plt.show()
     return 0
+
+
+def medals_barchart(medals):
+    medals_df['Medals'] = medals.reshape(578,1)
+    medal_groups = medals_df.groupby(['performancetier', 'Medals']).count()
+    medal_groups.reset_index(inplace=True)
+    medal_groups['Member'] = medal_groups['Member']
+    medal_groups['user_vec'] = medal_groups['user_vec'].astype(str)
+    medal_groups['order'] = [1,1,1,1,2,2,2,2,4,4,4,4,3,3,3,3,0,0,0]
+    medal_groups = medal_groups.sort_values('order')
+    medal_groups = medal_groups.iloc[:, [0,1,2,16]]
+    medal_groups['Percentage'] = medal_groups['Member']
+    medal_groups = pd.concat([medal_groups,
+                              pd.DataFrame([['novice', 'None', 2161, 0.0, 2161]],columns=medal_groups.columns),
+                              pd.DataFrame([['contributor', 'None', 1027, 1.0, 1027]],columns=medal_groups.columns),
+                              pd.DataFrame([['expert', 'None', 450, 2.0, 450]],columns=medal_groups.columns),
+                              pd.DataFrame([['master', 'None', 101, 3.0, 101]],columns=medal_groups.columns),
+                              pd.DataFrame([['grandmaster', 'None', 19, 4.0, 19]],columns=medal_groups.columns),
+                              pd.DataFrame([['novice', 'Winners', 0.0, 0.0, 0.0]], columns=medal_groups.columns)
+                              ])
+    medal_groups = medal_groups.sort_values('order')
+    medal_groups['Percentage'][medal_groups['performancetier'] == 'novice'] = medal_groups['Member'][medal_groups['performancetier'] == 'novice']/2413.
+    medal_groups['Percentage'][medal_groups['performancetier'] == 'contributor'] = medal_groups['Member'][medal_groups['performancetier'] == 'contributor']/1135.
+    medal_groups['Percentage'][medal_groups['performancetier'] == 'expert'] = medal_groups['Member'][medal_groups['performancetier'] == 'expert']/599.
+    medal_groups['Percentage'][medal_groups['performancetier'] == 'master'] = medal_groups['Member'][medal_groups['performancetier'] == 'master']/160.
+    medal_groups['Percentage'][medal_groups['performancetier'] == 'grandmaster'] = medal_groups['Member'][medal_groups['performancetier'] == 'grandmaster']/29.
+
+    none = np.array(medal_groups['Percentage'][medal_groups['Medals'] == 'None'])
+    bronze = np.array(medal_groups['Percentage'][medal_groups['Medals'] == 'Bronze'])
+    silver = np.array(medal_groups['Percentage'][medal_groups['Medals'] == 'Silver'])
+    gold = np.array(medal_groups['Percentage'][medal_groups['Medals'] == 'Gold'])
+    winners = np.array(medal_groups['Percentage'][medal_groups['Medals'] == 'Winners'])
+
+    two = np.add(none, bronze).tolist()
+    three = np.add(two, silver).tolist()
+    four = np.add(three, gold).tolist()
+
+    plt.rcParams['axes.xmargin'] = 0.1
+    ax = plt.subplot(111)
+    ax.spines['left'].set_visible(False)
+    ax.spines['bottom'].set_visible(False)
+    ax.spines['top'].set_visible(False)
+    ax.bar(np.arange(5), none, color='lightgrey', label='None')
+    ax.bar(np.arange(5), bronze, bottom=none, color='peru', label='Bronze')
+    ax.bar(np.arange(5), silver, bottom=two, color='gray', label='Silver')
+    ax.bar(np.arange(5), gold, bottom=three, color='goldenrod', label='Gold')
+    ax.bar(np.arange(5), winners, bottom=four, color='lightsteelblue', label='Winners')
+    ax.yaxis.tick_right()
+    ax.yaxis.set_label_position("right")
+    # plt.xticks(np.arange(5), ["novice", "contributor", "expert", "master", "grandmaster"],rotation='vertical')
+    plt.yticks(np.arange(0,1.2,0.2), rotation='vertical')
+    plt.ylabel('Percentage')
+    # plt.xlabel('Kaggle Ranking', rotation=180)
+    handles, labels = ax.get_legend_handles_labels()
+    # ax.legend(handles[::-1], labels[::-1], title='Medal', loc=1, bbox_to_anchor=(1.0, 1.15), frameon=False)
+    plt.savefig(os.getcwd() + '/participant_figures/medals_stacked_barchart.png', figsize=(5000, 5000))
+    plt.show()
+    return medal_groups
 
 
 if __name__ == '__main__':
@@ -344,44 +444,20 @@ if __name__ == '__main__':
     # get_participant_info(participant_urls)  # NO NEED TO RUN THIS ANYMORE -- ALL INFO SCRAPPED AND PICKLED
     participant_dict2 = pickle.load(open('/Users/jonathanroth/PycharmProjects/Kaggle_Demographics/kaggle_profiles_all2.obj', 'rb'))
 
-    # COUNTRY PLOTS
+    # NEW DATAFRAMES
+    final_df = create_final_df(teams_scores)
+    medals_df = create_medals_df(final_df)
+
+    # PLOTS FOR KAGGLE RANKING // RANK VS. #COMPETITIONS // JOIN DATES // MEDALS
     country_df = create_country_plots(participant_dict2)
-
-    # PLOTS FOR KAGGLE RANKING // RANK VS. #COMPETITIONS // JOIN DATES
     rank_df = ranking_plots(participant_dict2)
-    rank_competitions_df = rankVcompetitions(participant_dict2)
     joindate_df = join_dates(participant_dict2)
+    medals_groups = medals_barchart(medals)
+    medals_plots(medals_groups)
+    score_boxplot(final_df)
+    rank_competitions_df = rankVcompetitions(participant_dict2)
 
-    # CREATE DATAFRAMES
-    teams_scores_df = pd.DataFrame(teams_scores).T
-    teams_scores_df.columns = ['Team #', 'Score', 'Entries']
-    teams_scores_df['Team Name'] = teams_scores_df.index
-    team_members_df = pd.DataFrame.from_dict(teams_members_dict, orient='index')
-    team_members_df = pd.DataFrame([(k, member) for k, v in teams_members_dict.items() for member in v])
-    team_members_df.columns = ['Team Name', 'Member']
-    members_scores = pd.merge(team_members_df, teams_scores_df, on=['Team Name'])
-    participants_df = pd.DataFrame(participant_dict2).drop(147)
-    col_names = list(participants_df.columns)
-    col_names[0] = 'Member'
-    participants_df.columns = col_names
-    final_df = pd.merge(participants_df, members_scores, on=['Member'])
-    medals_df = final_df.iloc[0:578,]
-    medals = np.concatenate([np.repeat('Winners', 11),
-                             np.repeat('Gold', 24),
-                             np.repeat('Silver', 285),
-                             np.repeat('Bronze', 258)])
-
-    medals_df['Medals'] = medals
-    medal_groups = medals_df.groupby(['performancetier', 'Medals']).count()
-    medal_groups.reset_index(inplace=True)
-    medal_groups['Member'] = medal_groups['Member'].astype(str)
-    medal_groups['user_vec'] = medal_groups['user_vec'].astype(str)
-    medal_groups['order'] = [1,1,1,1,2,2,2,2,4,4,4,4,3,3,3,3,0,0,0]
-    medal_groups = medal_groups.sort_values('order')
-    medal_groups['order']
-    medals_plots(medal_groups)
-
-    # STATS!
+    ### STATS! ###
     rankpercentage_vec = participant_dict2['rankpercentage']
     rankpercentage_vec = np.delete(rankpercentage_vec, 147)
     rankpercentage_vec = rankpercentage_vec.astype(float)
@@ -390,4 +466,9 @@ if __name__ == '__main__':
     print(final_df['Score'][final_df['performancetier'] == 'contributor'].median())
     print(final_df['Score'][final_df['performancetier'] == 'expert'].median())
     print(final_df['Score'][final_df['performancetier'] == 'master'].median())
-    print(final_df['Score'][final_df['performancetier'] == 'grandmaster'].median())
+    print(final_df['Score'][final_df['performancetier'] == 'grandmaster'].median()
+
+    # MAP
+    import plotly.express as px
+
+
