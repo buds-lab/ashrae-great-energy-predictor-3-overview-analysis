@@ -11,7 +11,7 @@ This repository is for overview analysis of ASHRAE Great Energy Predictor Shooto
    * [People/Demographics](Demographics/Map.ipynb)
    
 #### Discussion Board (Leader: Anju)
-     Characterize and label participants and discussion topics from the competition
+     Characterize and label discussion topics and comments from the competition
    * [Discussion Board/Text Analysis](DiscussionBoard/DiscussionAnalysis.ipynb)
 
 #### Kernel notebooks (Leader: Chun)
