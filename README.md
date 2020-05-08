@@ -3,7 +3,7 @@ This repository is for overview analysis of ASHRAE Great Energy Predictor Shooto
 
 ### Web Scraping from Kaggle website (Leader: Anju/Chun)
      Get meta data of Kernel notebooks, Discussion topics, and Historical competitions   
-   * [Scrape kernel notebooks, discussion topics, and historical competitions)](WebScraping/Kaggle_WebScraping.ipynb)
+   * [Scrape kernel notebooks, discussion topics, and historical competitions](WebScraping/Kaggle_WebScraping.ipynb)
    * [Scrape discussion and comments text](WebScraping/Kaggle_WebScraping_Discussions.ipynb)
    
 ### Demographics (Leader: Jon)
