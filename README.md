@@ -17,4 +17,4 @@ This repository is for overview analysis of ASHRAE Great Energy Predictor Shooto
 ### Kernel notebooks (Leader: Chun)
      Characterize and label notebooks and techniques topics from the competition
    * [Notebook Data Cleaning](KernelNotebook/NotebookDataCleaning.ipynb) 
-   * [Notebook Analysis](KernelNotebook/NotebooksAnalysis.ipynb) 
+   * [Notebook Analysis](KernelNotebook/Combined%20bar%20charts.ipynb) 
