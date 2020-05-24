@@ -1,4 +1,4 @@
-# ashrae-great-energy-predictor-3-overview-analysis
+# The ASHRAE Great Energy Predictor III competition: Overview and results
 This repository is for overview analysis of ASHRAE Great Energy Predictor Shootout III in 2019.
 
 ### Web Scraping from Kaggle website (Leader: Anju/Chun)
