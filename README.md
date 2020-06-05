@@ -4,7 +4,8 @@ This repository is for overview analysis of ASHRAE Great Energy Predictor Shooto
 - ResearchGate
 - Bibtex
 
-There are several components to the analysis in this publication:
+## Overview of Analysis of Data *about the competition*
+There are several components to the analysis in this publication in which data was collected from the Kaggle platform in various ways:
 
 ### Web Scraping 
 Get meta data of Kernel notebooks, Discussion topics, and Historical competitions fromt the Kaggle website:
