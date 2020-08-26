@@ -1,8 +1,9 @@
 # The ASHRAE Great Energy Predictor III competition: Overview and results
-This repository is for overview analysis of ASHRAE Great Energy Predictor Shootout III in 2019 that is under review in the journal Science and Technology for the Built Environment. To cite this paper:
+This repository is for overview analysis of [a paper about the ASHRAE Great Energy Predictor Shootout III in the journal Science and Technology for the Built Environment](https://www.tandfonline.com/doi/full/10.1080/23744731.2020.1795514).
 
-- ResearchGate
-- Bibtex
+To cite this paper:
+
+Clayton Miller, Pandarasamy Arjunan, Anjukan Kathirgamanathan, Chun Fu, Jonathan Roth, June Young Park, Chris Balbach, Krishnan Gowri, Zoltan Nagy, Anthony D. Fontanini & Jeff Haberl (2020) The ASHRAE Great Energy Predictor III competition: Overview and results, Science and Technology for the Built Environment, DOI: 10.1080/23744731.2020.1795514
 
 ## Overview of Analysis of Data *about the competition*
 There are several components to the analysis in this publication in which data was collected from the Kaggle platform in various ways:
